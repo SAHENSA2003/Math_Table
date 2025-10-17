@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            font-family: sans-serif;
+        }
+
+        .table {
+            height: 100px;
+            width: 90vw;
+            margin: auto;
+            margin-top: 20px;
+            border: 2px solid black;
+            display: none;
+        }
+
+        .table .TR {
+            height: 100%;
+            width: 9vw;
+            border: 1px solid black;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        .table_input {
+            display: none;
+            flex-direction: column;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .table_input .User_input {
+            height: 40px;
+            width: 200px;
+            outline: none;
+        }
+
+
+        .generate,
+        .click,
+        .reuse {
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .generate {
+            height: 30px;
+            width: 150px;
+        }
+
+        .generate:hover,
+        .click:hover,
+        .reuse:hover {
+            background: rgb(142, 142, 240);
+            color: white;
+        }
+
+        .reuse {
+            display: none;
+            cursor: pointer;
+            margin: auto;
+            margin-top: 30px;
+        }
+
+        .th {
+            text-align: center;
+        }
+
+        .head {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="demo">
+        <div class="head">
+            <h1 style="color: red;">This is a small application Where you can create or check Table formation of any
+                Number. </h1>
+            <button class="click" title="staring of application">click to start</button>
+        </div>
+        <div class="table_input">
+            <h1 style="color: red;">Please use Number(> 0 ) only a time. </h1>
+            <input class="User_input" type="text" placeholder="Insert the table Number here  ">
+            <button class="generate" title="click to generate your expected table">click to generate</button>
+        </div>
+    </div>
+
+    <div class="th"></div>
+    <div class="table">
+
+    </div>
+    <button class="reuse" title="Reuse table generation">click to reuse</button>
+    <script>
+        /*Starting the main application with first click. */
+        let btn = document.querySelector('.click');
+        btn.addEventListener('click', () => {
+            document.querySelector('.table_input').style.display = 'flex';
+            document.querySelector('.head').style.display = 'none';
+        })
+
+
+        /*Handling input data , and creating table According to generate button.*/
+        document.querySelector('.generate').addEventListener('click', () => {
+            /*Handling DOM opacity according to click*/
+            document.querySelector('.demo').style.display = 'none';
+            document.querySelector('.table').style.display = 'flex'
+            document.querySelector('.reuse').style.display = 'block';
+            document.querySelector('.th').style.display = 'block';
+
+
+            /*Filtering Number form user input. */
+            let input = document.querySelector('.User_input').value;
+            console.log(input)
+            let input_str = input;
+            let input_num = '';
+            for (i = 0; i < input_str.length; i++) {
+                if (!isNaN(input_str[i]) && input_str[i] !== '') {
+                    input_num += input_str[i];
+                    console.log(input_str[i])
+                }
+            }
+            final_num = Number(input_num);
+
+
+            /*Creating Table function , which is taking a table number. */
+            function Table(num) {
+                document.querySelector('.th').innerHTML = `<h1>Table of ${num}</h1>`
+                let page_table = document.querySelector(".table");
+                //Handling if user give 0 or No_input or only string.
+                if (num === 0) {
+                    let th = document.querySelector('.th');
+                    th.innerHTML = `<h1>SomeThing went wrong!!!!!</h1>`;
+                    th.style.color = 'red';
+                    page_table.style.display = 'none'
+
+                } else {
+                    for (n = 1; n <= 10; n++) {
+                        page_table.innerHTML += `<div class='TR'>
+                            <div class='ttt'>${num}</div>
+                            <div>${n}</div>
+                            <div>${num * n}</div>
+                        </div>`;
+                    }
+                }
+                return page_table;
+            }
+            /*Calling table here.*/
+            Table(final_num);
+
+
+            /* Re-Rendering the application on Reuse click. */
+            document.querySelector('.reuse').addEventListener('click', () => {
+                document.querySelector('.demo').style.display = 'block';
+                document.querySelector('.demo h1').style.display = 'none';
+                document.querySelector('.demo .click').style.display = 'none';
+                document.querySelector('.table').style.display = 'none';
+                document.querySelector('.reuse').style.display = 'none';
+                document.querySelector('.th').style.display = 'none';
+                document.querySelector(".table").innerHTML = '';
+                document.querySelector('.User_input').value = '';
+            })
+
+        });
+
+    </script>
+</body>
+
+</html>
