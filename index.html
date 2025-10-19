@@ -6,22 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        * {
+       * {
             font-family: sans-serif;
         }
 
         .table {
-            height: 100px;
             width: 90vw;
             margin: auto;
             margin-top: 20px;
-            border: 2px solid black;
             display: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
         }
 
         .table .TR {
-            height: 100%;
-            width: 9vw;
+            height: 12vh;
+            padding: 4px 4px 4px 4px;
+            min-width: 5vw;
             border: 1px solid black;
             text-align: center;
             display: flex;
@@ -68,6 +71,7 @@
             cursor: pointer;
             margin: auto;
             margin-top: 30px;
+            position: relative;
         }
 
         .th {
@@ -94,7 +98,6 @@
             <button class="generate" title="click to generate your expected table">click to generate</button>
         </div>
     </div>
-
     <div class="th"></div>
     <div class="table">
 
