@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-       * {
+        * {
             font-family: sans-serif;
         }
 
@@ -22,9 +22,12 @@
         }
 
         .table .TR {
-            height: 12vh;
+            min-height: 12vh;
+            object-fit: contain;
+            overflow-wrap: break-word;
             padding: 4px 4px 4px 4px;
-            min-width: 5vw;
+            max-width: 90%;
+            min-width: 5%;
             border: 1px solid black;
             text-align: center;
             display: flex;
@@ -76,11 +79,15 @@
 
         .th {
             text-align: center;
+            max-width: 100%;
+            overflow-wrap: break-word;
         }
 
         .head {
             text-align: center;
         }
+
+        ;
     </style>
 </head>
 
@@ -88,16 +95,17 @@
 
     <div class="demo">
         <div class="head">
-            <h1 style="color: red;">This is a small application Where you can create or check Table formation of any
-                Number. </h1>
+            <h1 style="color: red;">This is a powerful table generator for all the numbers in the world !! click below
+                to start the application </h1>
             <button class="click" title="staring of application">click to start</button>
         </div>
         <div class="table_input">
-            <h1 style="color: red;">Please use Number(> 0 ) only a time. </h1>
-            <input class="User_input" type="text" placeholder="Insert the table Number here  ">
-            <button class="generate" title="click to generate your expected table">click to generate</button>
+            <h1 style="color: red;">Please use Number(> 0 or < ~) only a time. </h1>
+                    <input class="User_input" type="text" placeholder="Insert the table Number here  ">
+                    <button class="generate" title="click to generate your expected table">click to generate</button>
         </div>
     </div>
+
     <div class="th"></div>
     <div class="table">
 
@@ -129,29 +137,29 @@
             for (i = 0; i < input_str.length; i++) {
                 if (!isNaN(input_str[i]) && input_str[i] !== '') {
                     input_num += input_str[i];
-                    console.log(input_str[i])
                 }
             }
             final_num = Number(input_num);
+            typeof (final_num);
 
 
             /*Creating Table function , which is taking a table number. */
             function Table(num) {
-                document.querySelector('.th').innerHTML = `<h1>Table of ${num}</h1>`
                 let page_table = document.querySelector(".table");
                 //Handling if user give 0 or No_input or only string.
-                if (num === 0) {
+                if (num === 0 || isNaN(num)) {
                     let th = document.querySelector('.th');
                     th.innerHTML = `<h1>SomeThing went wrong!!!!!</h1>`;
                     th.style.color = 'red';
                     page_table.style.display = 'none'
 
                 } else {
+                    document.querySelector('.th').innerHTML = `<h1>Table of ${BigInt(num).toString()}</h1>`
                     for (n = 1; n <= 10; n++) {
                         page_table.innerHTML += `<div class='TR'>
-                            <div class='ttt'>${num}</div>
+                            <div class='ttt'>${BigInt(num).toString()}</div>
                             <div>${n}</div>
-                            <div>${num * n}</div>
+                            <div class='table_value'>${BigInt(num * n).toString()}</div>
                         </div>`;
                     }
                 }
